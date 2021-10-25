@@ -11,3 +11,5 @@ aaaaa
 =======
 閃光のハサウェイ
 >>>>>>> origin/Michiaki
+
+inp
