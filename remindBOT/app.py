@@ -100,6 +100,26 @@ def keiba_template():
             ]
         )
     )
+def make_syumi_template():
+    message_template = TemplateSendMessage(
+        alt_text="趣味のURL",
+        template=ButtonsTemplate(
+            text="取り扱いにはご注意を",
+            title="趣味のURLです",
+            image_size="cover",
+            thumbnail_image_url="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Seal_of_the_U.S._National_Security_Agency.svg/1200px-Seal_of_the_U.S._National_Security_Agency.svg.png",
+            actions=[
+                URIAction(
+                    uri="https://www.tokyo-marui.co.jp/",
+                    label="マルイ"
+                ),
+                URIAction(
+                    uri="https://www.azurlane.jp/",
+                    label="海戦"
+                )
+            ]
+        )
+    )
     return message_template
 
 
@@ -169,6 +189,13 @@ def handle_message(event):
         )
     elif "競馬" in event.message.text:
         messages = keiba_template()
+        line_bot_api.reply_message(
+        event.reply_token,
+        messages
+        )
+
+    elif "趣味" in event.message.text:
+        messages = make_syumi_template() #テンプレートで返す
         line_bot_api.reply_message(
         event.reply_token,
         messages
