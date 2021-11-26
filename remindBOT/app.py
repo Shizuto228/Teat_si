@@ -80,6 +80,26 @@ def make_button_template():
             ]
         )
     )
+def keiba_template():
+    message_template = TemplateSendMessage(
+        alt_text="競馬へのリンク",
+        template=ButtonsTemplate(
+            title="ジャパンカップのURLです",
+            text="破産する可能性があります",
+            image_size="cover",
+            thumbnail_image_url="https://www-f.keiba.jp/img/graderace/2021/1128_japancup/japanCup_001.jpg?",
+            actions=[
+                URIAction(
+                    uri="https://race.netkeiba.com/race/shutuba.html?race_id=202105050812",
+                    label="出走馬の一覧です"
+                ),
+                URIAction(
+                    uri="https://race.netkeiba.com/race/data_top.html?race_id=202105050812&rf=race_submenu",
+                    label="データ分析の一覧です"
+                )
+            ]
+        )
+    )
     return message_template
 
 
@@ -146,6 +166,12 @@ def handle_message(event):
                         QuickReplyButton(action=MessageAction(label="金曜日", text="金曜日")),
                     ])
             )
+        )
+    elif "競馬" in event.message.text:
+        messages = keiba_template()
+        line_bot_api.reply_message(
+        event.reply_token,
+        messages
         )
 
 
